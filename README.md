@@ -12,4 +12,4 @@ Main features of the Ev3 Tracked Explorer Mark II **software**:
 
 Have a look at the [Smallrobots.it](https://www.smallrobots.it/) blog for details.
 
-![Ev3 Tracked Explorer](pictures/TE_MarkII_Pictures_07.png)
+![Ev3 Tracked Explorer](pictures/TE_MarkII.png)
