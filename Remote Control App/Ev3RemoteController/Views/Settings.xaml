@@ -1,0 +1,267 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="Smallrobots.Ev3RemoteController.Views.Settings"
+    mc:Ignorable="d"
+    
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+    
+    RequiresPointer="Never" KeyDown="Page_KeyDown"
+    Background="#19D3D3D3" Width="665">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Uniform" ImageSource="..\Assets\Ev3Tank-v1-12.png" Opacity="0.05"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Pannello sinistro -->
+        <StackPanel Grid.Row="0" Grid.Column="0" 
+                    Orientation="Vertical"
+                    Margin="10"
+                    d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <!-- Ev3 Controller -->
+            <Grid x:Name="___Grid__Ev3_IP_Settings" 
+                  HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                       TextWrapping="Wrap" 
+                       Text="Robot settings" 
+                       Style="{StaticResource BaseTextBlockStyle}" 
+                       d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0,5" 
+                       />
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                       TextWrapping="Wrap" 
+                       Text="IP Address" 
+                       Style="{StaticResource BodyTextBlockStyle}"  
+                       d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"
+                       VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" 
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap" 
+                           Text="IP Port"                            
+                           Style="{StaticResource BodyTextBlockStyle}"  
+                           d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
+                <!-- IP Address -->
+                <TextBox x:Name="textBox_RobotIpAddress" Grid.Row="1" Grid.Column="1" 
+                         TextWrapping="Wrap" 
+                         Text="{Binding RobotIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{ThemeResource UserSetting_TextBoxStyle}" 
+                         d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition" 
+                         BorderBrush="{Binding RobotIpAddress_IsValid, Converter={StaticResource BooleanToValidityBrushColorConverter}}"
+                         IsEnabled="{Binding ConnectionStatus, Converter={StaticResource ConnectionStatusToBooleanConverter}}"
+                         Width="170"
+                         Margin="5"
+                         />
+                <!-- IP Port -->
+                <TextBox x:Name="textBox_RobotIpPort" Grid.Row="2" Grid.Column="1" 
+                         VerticalAlignment="Center"
+                         TextWrapping="Wrap" 
+                         Text="{Binding RobotIPPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{ThemeResource UserSetting_TextBoxStyle}" 
+                         d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition" 
+                         BorderBrush="{Binding RobotIpPort_IsValid, Converter={StaticResource BooleanToValidityBrushColorConverter}}"
+                         IsEnabled="{Binding ConnectionStatus, Converter={StaticResource ConnectionStatusToBooleanConverter}}"
+                         Width="170"
+                         Margin="5"/>
+            </Grid>
+            <!-- Ev3 Remote unit -->
+            <Grid x:Name="___Grid__Controller_IP_Settings" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                       TextWrapping="Wrap" 
+                       Style="{StaticResource BaseTextBlockStyle}" 
+                       d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0,5" 
+                       Text="Controller settings"/>
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           TextWrapping="Wrap" 
+                           Text="IP Address" 
+                           Style="{StaticResource BodyTextBlockStyle}"  
+                           d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" 
+                           TextWrapping="Wrap" 
+                           Text="IP Port" 
+                           Style="{StaticResource BodyTextBlockStyle}" 
+                           VerticalAlignment="Center"
+                           d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
+                <!-- IP Address -->
+                <TextBox x:Name="textBox_ControllerIpAddress" Grid.Row="1" Grid.Column="1" 
+                         TextWrapping="Wrap" 
+                         Text="{Binding ControllerIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource UserSetting_TextBoxStyle}" 
+                         d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition"
+                         BorderBrush="{Binding ControllerIpAddress_IsValid, Converter={StaticResource BooleanToValidityBrushColorConverter}}"
+                         IsEnabled="{Binding ConnectionStatus, Converter={StaticResource ConnectionStatusToBooleanConverter}}"
+                         Width="170"
+                         Margin="5"/>
+                <!-- IP Port -->
+                <TextBox x:Name="textBox_ControllerIpPort" Grid.Row="2" Grid.Column="1" 
+                         TextWrapping="Wrap" 
+                         Text="{Binding ControllerIPPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Style="{StaticResource UserSetting_TextBoxStyle}" 
+                         d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition" 
+                         BorderBrush="{Binding ControllerIpPort_IsValid, Converter={StaticResource BooleanToValidityBrushColorConverter}}"
+                         IsEnabled="{Binding ConnectionStatus, Converter={StaticResource ConnectionStatusToBooleanConverter}}"
+                         Width="170"
+                         Margin="5"/>
+                <!-- Joystick -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                           TextWrapping="Wrap" 
+                           Text="{Binding GameControllerConnectedNotification}" 
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource BaseTextBlockStyle}"  
+                           d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0,20,5,5"/>
+                <!-- Joystick position -->
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Left X Position -->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="Left X Position"
+                               VerticalAlignment="Center"
+                               Margin="0,5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="{Binding LeftThumbStickX}"
+                               TextAlignment="Right"/>
+                    <!-- Left Y Position -->
+                    <TextBlock Grid.Row="1" Grid.Column="0"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="Left Y Position"
+                               VerticalAlignment="Center"
+                               Margin="0,5"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="{Binding LeftThumbStickY}"
+                               TextAlignment="Right"/>
+                    <!-- RIght X Position -->
+                    <TextBlock Grid.Row="2" Grid.Column="0"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="Right X Position"
+                               VerticalAlignment="Center"
+                               Margin="0,5"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="{Binding RightThumbStickX}"
+                               TextAlignment="Right"/>
+                </Grid>
+            </Grid>
+        </StackPanel>
+        <!-- Pannello destop-->
+        <!-- Connection diagnostics -->
+        <Grid Grid.Row="0" Grid.Column="1" 
+              x:Name="___Grid__Connection_Diagnostic" 
+              Margin="10"  
+              HorizontalAlignment="Stretch"
+              d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" 
+              Width="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Title -->
+            <StackPanel Grid.Row="0" Grid.Column="0"
+                        HorizontalAlignment="Left"  
+                        d:LayoutOverrides="TopPosition, BottomPosition" 
+                        Orientation="Horizontal" >
+                <TextBlock TextWrapping="Wrap" 
+                           Text="Connection status" 
+                           Style="{StaticResource BaseTextBlockStyle}"
+                           Margin="0,5"
+                           />
+            </StackPanel>
+            <!-- Ping -->
+            <StackPanel Grid.Row="1" Grid.Column="0"
+                        HorizontalAlignment="Right"  
+                        d:LayoutOverrides="TopPosition, BottomPosition" 
+                        Orientation="Horizontal" >
+                <TextBlock TextWrapping="Wrap" 
+                           Text="Check reachability with a " 
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           VerticalAlignment="Center"/>
+                <Button x:Name="button2" Content="Ping"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource CommanButtonStyle}"
+                        Command="{Binding Ping}"/>
+            </StackPanel>
+            <!-- Connect / Disconnect -->
+            <StackPanel Grid.Row="2" Grid.Column="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="5,5,5,5">
+                <Button x:Name="button" Content="Connect" 
+                        Style="{StaticResource CommanButtonStyle}"
+                        Command="{Binding Connect}"/>
+                <Button x:Name="button1" Content="Disconnect"  
+                        Style="{StaticResource CommanButtonStyle}"
+                        Command="{Binding Disconnect}"/>
+            </StackPanel>
+            <!-- Log -->
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                  x:Name="___Grid_Connection_log"
+                  Width="Auto"
+                  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="Connection log" 
+                           Style="{StaticResource BaseTextBlockStyle}" 
+                           Margin="0,5" HorizontalAlignment="Left"/>
+                <TextBox x:Name ="LogView" Grid.Row="1" Grid.Column="0" 
+                         TextWrapping="Wrap"
+                         Text="{Binding ConnectionLog}"
+                         TextChanged="TextBox_TextChanged"
+                         IsReadOnly="True" 
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

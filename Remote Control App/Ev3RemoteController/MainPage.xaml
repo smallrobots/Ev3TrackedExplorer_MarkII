@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Ev3RemoteController.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:views="using:Smallrobots.Ev3RemoteController.Views"
+    
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+    
+    RequiresPointer="Never" KeyDown="Page_KeyDown">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal"
+                    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+            <Image Source="..\Assets\Smallrobots_Logo_TransparentBackground.png"
+                   Width="33"
+                   Margin="5"/>
+            <TextBlock Text="Ev3 Remote Controller"
+                       VerticalAlignment="Center"
+                       Style="{ThemeResource SubheaderTextBlockStyle}"
+                       Margin="5,5,5,5"
+                       FontSize="21.5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"
+                    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+            <Button x:Name="robot_settings_Button"
+                    Content="Rover"
+                    Style="{ThemeResource ButtonRevealStyle}"
+                    Margin="5"
+                    Click="View_Click"/>
+            <Button x:Name="settings_Button"
+                    Content="Communication"
+                    Style="{ThemeResource ButtonRevealStyle}"
+                    Margin="5"
+                    Click="View_Click"/>
+            <Button x:Name="drive_Button"
+                    Content="Drive"
+                    Style="{ThemeResource ButtonRevealStyle}"
+                    Margin="5" 
+                    Click="View_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1"
+                    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+            <Button x:Name="about_button" 
+                    Content="About"
+                    Style="{ThemeResource ButtonRevealStyle}"
+                    FocusVisualMargin="10"
+                    Margin="5"
+                    Click="View_Click"
+                    HorizontalAlignment="Right"/>
+        </StackPanel>
+        <ContentControl Grid.Row="2" Grid.ColumnSpan="2"
+                        x:Name="mainViewArea"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"/>
+    </Grid>
+</Page>
