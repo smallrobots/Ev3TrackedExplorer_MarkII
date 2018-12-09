@@ -12,5 +12,3 @@ Main features:
 Have fun!
 
 ![Screenshot](Ev3RemoteController/Assets/Schermata%202018-02-22%20alle%2008.52.49.png)
-
-![Ev3 Tracked Explorer](Ev3RemoteController/Assets/Ev3Tank-v1-12.png)
