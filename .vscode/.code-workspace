@@ -1,0 +1,14 @@
+{
+    "folders": [
+        {
+            // The UWP Application to control the rover remotely
+            "name": "Remote Control App",
+            "path": "Remote Control App"
+        },
+        {
+            // The Python scripts running on the rover
+            "name": "Rover App",
+            "path": "Rover App"
+        }
+    ]
+}

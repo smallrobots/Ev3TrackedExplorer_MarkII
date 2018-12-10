@@ -306,11 +306,11 @@ class Ev3TrackedExplor3r (Ev3RobotModel):
             message.right_motor_speed = self.get_right_motor_speed()
         
         if self.ircs_activated:
-            # Get the reading only for the selected moe
+            # Get the reading only for the selected mode
             # This is continuous ir scan
             message.ircs_scan_list = self.get_continuous_scan()
             message.single_ir_reading = 0
-            message.head_motor_position = 0
+            message.head_motor_position = self.get_head_motor_position()
         else:
             # This is single ir reading
             message.single_ir_reading = self.get_single_ir_reading()
