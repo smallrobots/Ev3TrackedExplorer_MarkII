@@ -1,0 +1,130 @@
+﻿<!-- Rover Remote Controller -->
+<!-- Smallrobots.it (C) Copyright 2019 -->
+<Window x:Class="RoverRemoteController.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RoverRemoteController"
+        xmlns:views="clr-namespace:RoverRemoteController.Views"
+        mc:Ignorable="d"
+        
+        Title="Rover Remote Controller" 
+        Height="450" Width="800"
+        
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        Background="{x:Null}"
+        ResizeMode="CanResizeWithGrip" StateChanged="Window_StateChanged">
+
+    <Window.Resources>
+
+    </Window.Resources>
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
+    </WindowChrome.WindowChrome>
+    <Border CornerRadius="12"
+            BorderThickness="0">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0.5,0" 
+                                 EndPoint="0.5,1">
+                <GradientStop Color="White" Offset="0.016"/>
+                <GradientStop Color="#FF3E3E3E" Offset="0.114"/>
+                <GradientStop Color="#FF3E3E3E" Offset="1"/>
+                <GradientStop Color="#FF3E3E3E"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Grid Background="#FF6B6B6B">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Title bar -->
+            <DockPanel Grid.Row="0"
+                       MouseDown="Canvas_MouseDown"
+                       LastChildFill="False">
+                <!-- Left side -->
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Left">
+                    <Image Source="Resources/AppIcon_Transparent.png" 
+                           Width="30"
+                           Margin="2.5,0"
+                           VerticalAlignment="Center"/>
+                    <Label Content="Rover Remote Controller"
+                           Margin="2.5,0"
+                           FontSize="14"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <!-- Right side -->
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Right">
+                    <!-- Connect button -->
+                    <Button Height="40"
+                            BorderThickness="0"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            Focusable="False">
+                        Connect
+                    </Button>
+                    <views:LedControl Content="Online" IsChecked="False" Height="20"
+                                      OnColor="Green"
+                                      OffColor="LightGray"
+                                      x:Name="OnlineIndicator"
+                                      Click="OnlineIndicator_Click"/>
+                    <views:LedControl Content="Offline" IsChecked="True" Height="20"
+                                      OnColor="Red" 
+                                      OffColor="LightGray" 
+                                      x:Name="OfflineIndicator" 
+                                      Click="OnlineIndicator_Click"/>
+                    <!-- Minimize button -->
+                    <Button Width="40"
+                            Height="40"
+                            BorderThickness="0"  
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                            Click="Minimize_Button_Click"
+                            x:Name="MinimizeButton"
+                            Focusable="False">
+                        <Image Source="Resources\appbar.minus.png"
+                               Width="25"/>
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" 
+                                    EndPoint="0.5,1">
+                                <GradientStop Color="#FF5F5F5F" Offset="1"/>
+                                <GradientStop Color="White" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <!-- Close button -->
+                    <Button Width="40"
+                            Height="40"
+                            BorderThickness="0"  
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            Click="Close_Button_Click">
+                        <Image Source="Resources\appbar.close.png"
+                               Width="25"/>
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" 
+                                    EndPoint="0.5,1">
+                                <GradientStop Color="#FF5F5F5F" Offset="1"/>
+                                <GradientStop Color="White" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <DockPanel.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" 
+                                    EndPoint="0.5,1">
+                        <GradientStop Color="#FF5F5F5F" Offset="1"/>
+                        <GradientStop Color="White" Offset="0"/>
+                    </LinearGradientBrush>
+                </DockPanel.Background>
+            </DockPanel>
+            
+            <!-- Cient area -->
+            <Grid Grid.Row="1">
+                <Label Content="Client Area"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
