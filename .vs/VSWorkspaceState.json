@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Remote Control App _ Desktop",
+    "\\Remote Control App _ UWP"
   ],
-  "SelectedNode": "\\Remote Control App",
+  "SelectedNode": "\\Remote Control App _ Desktop\\RoverRemoteController.sln",
   "PreviewInSolutionExplorer": false
 }
