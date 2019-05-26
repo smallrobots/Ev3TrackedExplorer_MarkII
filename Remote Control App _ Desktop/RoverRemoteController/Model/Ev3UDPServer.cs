@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Sockets;
 using System.Threading;
+using System.Text;
 
 namespace Smallrobots.Ev3RemoteController.Models
 {
@@ -196,18 +197,12 @@ namespace Smallrobots.Ev3RemoteController.Models
 
                 // Encode the message
                 string serializedMessage = JsonConvert.SerializeObject(message);
+                byte[] datagram = Encoding.Unicode.GetBytes(serializedMessage);
 
                 // Send the message
                 // LogString = "\nSending subscribe message";
-                DataWriter writer;
-
-                writer = new DataWriter(udpSender.OutputStream);
-                writer.WriteString(serializedMessage);
-                await writer.StoreAsync();
-                // LogString = "\nMessage sent";
-
-                // Release the output stream
-                writer.DetachStream();
+                IPEndPoint endPoint = new IPEndPoint(controllerIpAddress, controllerIpPort);
+                await udpSender.SendAsync(datagram, datagram.Length, endPoint);
             }
         }
 
