@@ -218,26 +218,21 @@ namespace Smallrobots.Ev3RemoteController.Models
 
                 // Encode the message
                 string serializedMessage = JsonConvert.SerializeObject(message);
+                byte[] datagram = Encoding.Unicode.GetBytes(serializedMessage);
 
                 // Send the message
                 // LogString = "\nSending command message";
-                DataWriter writer;
-
-                writer = new DataWriter(udpSender.OutputStream);
-                writer.WriteString(serializedMessage);
+                IPEndPoint endPoint = new IPEndPoint(controllerIpAddress, controllerIpPort);
+                
                 try
                 {
-                    await writer.StoreAsync();
+                    await udpSender.SendAsync(datagram, datagram.Length, endPoint);
                 }
                 catch (Exception ex)
                 {
                     LogString = "\nExcpetion in Ev3UDPServer.sendCommandMessage() " + ex.Message;
                     udpSender = null;
                 }
-
-                // Release the output stream
-                writer.DetachStream();
-                // LogString = "\nMessage sent";
             }
         }
 
