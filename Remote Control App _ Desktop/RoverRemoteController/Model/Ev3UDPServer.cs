@@ -123,10 +123,10 @@ namespace Smallrobots.Ev3RemoteController.Models
         public async void Start()
         {
             // Start the timer
-            senderTimer = ThreadPoolTimer.CreatePeriodicTimer(Sender, new TimeSpan(0, 0, 0, 0, samplingPeriod));
+            senderTimer = new Timer(Sender, senderTimer, 0, samplingPeriod);
 
             // Bind the inbound socket
-            udpListener = new DatagramSocket();
+            udpListener = new UdpClient();
             udpListener.MessageReceived += UdpListener_MessageReceived;
             await udpListener.BindServiceNameAsync(controllerIpPort.ToString());
         }
@@ -155,8 +155,7 @@ namespace Smallrobots.Ev3RemoteController.Models
         /// <summary>
         /// Sender Task called periodically
         /// </summary>
-        /// <param name="timer"></param>
-        void Sender(Timer timer)
+        void Sender(object state)
         {
             // Check if a connection has been previously already established
             if (udpSender == null)
